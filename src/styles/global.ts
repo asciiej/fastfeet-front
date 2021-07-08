@@ -12,10 +12,14 @@ export default createGlobalStyle`
     font: 15px 'Inter', sans-serif;
   }
 
-  #root {
+  /* Usado para forçar o tamanho do celular, em uma tela normal
+    Porém não é mais necessário, pq a tela está sendo feita no tamanho de celular
+
+    #root {
     max-width: 375px;
     margin: 0 auto;
-  }
+  } 
+  */
 
   button {
     cursor: pointer;
