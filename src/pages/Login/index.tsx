@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
             <input type="checkbox" id="lembrar" name="lembrar" />
             Lembrar-me
           </label>
-          <a href="teste">Esqueci minha senha</a>
+          <Link to="/forgot">Esqueci minha senha</Link>
         </div>
 
         <button type="submit">Entrar</button>
