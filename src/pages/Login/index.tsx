@@ -10,36 +10,30 @@ import errorImg from '../../assets/warning.svg';
 import { Main, Header, Form, InputWithIcon, Erro } from './styles';
 
 import api from '../../services/api';
+import { login } from '../../services/auth';
 
 const Login: React.FC = () => {
   const history = useHistory();
   const [inputError, setInputError] = useState('');
-  const [cpf, setCpf] = useState('');
+
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    if (!cpf || !password) {
+    if (!email || !password) {
       throw new Error('Preencha e-mail e senha para continuar!');
     }
 
     try {
-      const response = await api.get(`/users?cpf=${cpf}`);
+      const response = await api.post('sessions', { email, password });
 
-      if (response.data.lenght === 0) {
-        return;
-      }
-
-      const user = response.data[0];
-
-      if (password !== user.password) {
-        return;
-      }
+      login(response.data.token);
 
       history.push('/forgot');
     } catch (err) {
-      setInputError('Senha ou CPF incorretos.');
+      setInputError('Senha ou email incorretos.');
 
       setTimeout(() => {
         setInputError('');
@@ -64,9 +58,9 @@ const Login: React.FC = () => {
           <InputWithIcon>
             <input
               type="text"
-              placeholder="CPF"
-              value={cpf}
-              onChange={e => setCpf(e.target.value)}
+              placeholder="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
             <FaUserAlt size={16} />
           </InputWithIcon>
