@@ -1,47 +1,104 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, FormEvent } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 
 import logoImg from '../../assets/logotipo.svg';
 import nameImg from '../../assets/logo.svg';
+import errorImg from '../../assets/warning.svg';
 
-import { Main, Header, Form, InputWithIcon } from './styles';
+import { Main, Header, Form, InputWithIcon, Erro } from './styles';
+
+import api from '../../services/api';
 
 const Login: React.FC = () => {
+  const history = useHistory();
+  const [inputError, setInputError] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
+    event.preventDefault();
+
+    if (!cpf || !password) {
+      throw new Error('Preencha e-mail e senha para continuar!');
+    }
+
+    try {
+      const response = await api.get(`/users?cpf=${cpf}`);
+
+      if (response.data.lenght === 0) {
+        return;
+      }
+
+      const user = response.data[0];
+
+      if (password !== user.password) {
+        return;
+      }
+
+      history.push('/forgot');
+    } catch (err) {
+      setInputError('Senha ou CPF incorretos.');
+
+      setTimeout(() => {
+        setInputError('');
+      }, 2000);
+    }
+  }
+
   return (
-    <Main>
-      <Header>
-        <img src={logoImg} alt="Logo" />
-        <img src={nameImg} alt="Name" />
-      </Header>
+    <>
+      <Main>
+        <Header>
+          <img src={logoImg} alt="Logo" />
+          <img src={nameImg} alt="Name" />
+        </Header>
 
-      <h1>
-        <span>Entregador,</span> você é nosso maior valor
-      </h1>
-      <p>Faça seu login para começar suas entregas.</p>
+        <h1>
+          <span>Entregador,</span> você é nosso maior valor
+        </h1>
+        <p>Faça seu login para começar suas entregas.</p>
 
-      <Form>
-        <InputWithIcon>
-          <input type="text" placeholder="CPF" />
-          <FaUserAlt size={16} />
-        </InputWithIcon>
-        <InputWithIcon>
-          <input type="password" placeholder="Senha" />
-          <FaLock size={16} />
-        </InputWithIcon>
+        <Form onSubmit={handleLogin}>
+          <InputWithIcon>
+            <input
+              type="text"
+              placeholder="CPF"
+              value={cpf}
+              onChange={e => setCpf(e.target.value)}
+            />
+            <FaUserAlt size={16} />
+          </InputWithIcon>
+          <InputWithIcon>
+            <input
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <FaLock size={16} />
+          </InputWithIcon>
 
-        <div className="options">
-          <label htmlFor="lembrar">
-            <input type="checkbox" id="lembrar" name="lembrar" />
-            Lembrar-me
-          </label>
-          <Link to="/forgot">Esqueci minha senha</Link>
-        </div>
+          <div className="options">
+            <label htmlFor="lembrar">
+              <input type="checkbox" id="lembrar" name="lembrar" />
+              Lembrar-me
+            </label>
+            <Link to="/forgot">Esqueci minha senha</Link>
+          </div>
 
-        <button type="submit">Entrar</button>
-      </Form>
-    </Main>
+          <button type="submit">Entrar</button>
+        </Form>
+      </Main>
+
+      {inputError && (
+        <Erro>
+          <img src={errorImg} alt="Erro imagem" />
+          {inputError}
+        </Erro>
+      )}
+    </>
   );
 };
 

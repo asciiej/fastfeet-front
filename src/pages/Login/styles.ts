@@ -88,3 +88,26 @@ export const InputWithIcon = styled.div`
     top: 28px;
   }
 `;
+
+export const Erro = styled.div`
+  position: absolute;
+  font-size: 24px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  background: #000;
+  opacity: 0.8;
+  height: 100vh;
+  width: 100%;
+  padding: 0px 60px;
+  text-align: center;
+
+  img {
+    height: 53.33px;
+    width: 53.33px;
+    margin: 0 auto;
+    margin-bottom: 29.33px;
+  }
+`;

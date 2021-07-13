@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Tiago Souza",
+      "cpf": "123.456.789-00",
+      "password": "abc123",
+      "isPostman": false
+    }
+  ]
+}
