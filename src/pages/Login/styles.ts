@@ -92,15 +92,18 @@ export const InputWithIcon = styled.div`
 export const Erro = styled.div`
   position: absolute;
   font-size: 24px;
-  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: #fff;
   background: #000;
   opacity: 0.8;
-  height: 100vh;
-  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 0px 60px;
   text-align: center;
 

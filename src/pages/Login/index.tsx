@@ -27,11 +27,12 @@ const Login: React.FC = () => {
     }
 
     try {
-      const response = await api.post('sessions', { email, password });
+      // para teste, ao usar api do gostack, na sessions é passado email no lugar do cpf
+      const response = await api.post('/sessions', { email, password });
 
       login(response.data.token);
 
-      history.push('/forgot');
+      history.push('/deliveries');
     } catch (err) {
       setInputError('Senha ou email incorretos.');
 
@@ -58,7 +59,7 @@ const Login: React.FC = () => {
           <InputWithIcon>
             <input
               type="text"
-              placeholder="email"
+              placeholder="CPF"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
