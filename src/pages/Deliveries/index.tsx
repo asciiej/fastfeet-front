@@ -3,7 +3,7 @@ import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FiLogOut, FiSearch } from 'react-icons/fi';
 
-import { Main, Header, Container, InputWithIcon } from './styles';
+import { Main, Header, Container, InputWithIcon, Separator } from './styles';
 
 const Deliveries: React.FC = () => {
   return (
@@ -25,7 +25,9 @@ const Deliveries: React.FC = () => {
           <FiSearch />
         </InputWithIcon>
       </Header>
-      <Main />
+      <Main>
+        <Separator>8 entregas</Separator>
+      </Main>
     </Container>
   );
 };

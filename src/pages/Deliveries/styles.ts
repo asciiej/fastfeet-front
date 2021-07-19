@@ -72,3 +72,28 @@ export const InputWithIcon = styled.div`
     top: 22px;
   }
 `;
+
+export const Separator = styled.div`
+  font-size: 14px;
+  color: #bebccc;
+
+  margin: 32px 0;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #bebccc;
+    margin-right: 16px;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #bebccc;
+    margin-left: 16px;
+  }
+`;
