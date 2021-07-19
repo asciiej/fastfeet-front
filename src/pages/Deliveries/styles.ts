@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
 `;
 
 export const Main = styled.main`
   flex: 1;
-  padding: 30px 20px 10px 20px;
+  padding: 30px 20px 70px 20px;
   background: #f7f5fa;
 `;
 
@@ -18,10 +18,11 @@ export const Header = styled.header`
   display: flex;
   flex-direction: column;
   color: #d5ccff;
+  position: sticky;
+  top: 0;
 
   h1 {
-    font-family: 32px 'Roboto Condensed', sans-serif;
-    font-weight: bold;
+    font-size: 32px;
     line-height: 36px;
     color: #fff;
   }
@@ -77,7 +78,7 @@ export const Separator = styled.div`
   font-size: 14px;
   color: #bebccc;
 
-  margin: 32px 0;
+  margin: 18px 0;
   display: flex;
   align-items: center;
 
@@ -95,5 +96,23 @@ export const Separator = styled.div`
     height: 1px;
     background: #bebccc;
     margin-left: 16px;
+  }
+`;
+
+export const Footer = styled.footer`
+  height: 70px;
+  position: fixed;
+  bottom: 0;
+
+  button {
+    width: calc(100vw / 2);
+    height: 100%;
+    background: #f7f5fa;
+    border: 0;
+
+    &:focus {
+      border-top: 4px solid #ffc042;
+      background: #fff;
+    }
   }
 `;

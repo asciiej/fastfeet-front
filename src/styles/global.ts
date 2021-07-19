@@ -21,6 +21,12 @@ export default createGlobalStyle`
   } 
   */
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family:'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    color: #4C4766;
+  }
+
   button {
     cursor: pointer;
   }
