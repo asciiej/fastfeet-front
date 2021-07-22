@@ -15,6 +15,7 @@ import {
 } from './styles';
 
 type Package = {
+  id: number;
   title: string;
   date: string;
 };
@@ -22,18 +23,22 @@ type Package = {
 const Deliveries: React.FC = () => {
   const pendentes = [
     {
+      id: 1,
       title: 'Pacote 03',
       date: '01/07/2020',
     },
     {
+      id: 2,
       title: 'Pacote 04',
       date: '02/07/2020',
     },
     {
+      id: 3,
       title: 'Pacote 05',
       date: '03/07/2020',
     },
     {
+      id: 4,
       title: 'Pacote 06',
       date: '04/07/2020',
     },
@@ -41,10 +46,12 @@ const Deliveries: React.FC = () => {
 
   const feitas = [
     {
+      id: 5,
       title: 'Pacote 01',
       date: '29/06/2020',
     },
     {
+      id: 6,
       title: 'Pacote 02',
       date: '30/06/2020',
     },
@@ -72,7 +79,7 @@ const Deliveries: React.FC = () => {
         </InputWithIcon>
       </Header>
       <Main>
-        <Separator>8 entregas</Separator>
+        <Separator>{packages.length} entrega(s)</Separator>
         <PackagesList content={packages} />
       </Main>
       <Footer>

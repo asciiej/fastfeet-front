@@ -17,6 +17,10 @@ export const Box = styled.div`
     padding: 24px;
     font-size: 22px;
 
+    h3 {
+      color: #4c4766;
+    }
+
     div {
       display: flex;
       align-items: center;

@@ -9,6 +9,7 @@ import packageIcon from '../../assets/package.svg';
 import { Packages, Box } from './styles';
 
 type Package = {
+  id: number;
   title: string;
   date: string;
 };
@@ -21,7 +22,7 @@ export function PackagesList({ content }: PackagesListProps): ReactElement {
   return (
     <Packages>
       {content.map(delivery => (
-        <Box>
+        <Box key={delivery.id}>
           <div>
             <div>
               <img src={packageIcon} alt="Package Icon" />
@@ -29,7 +30,7 @@ export function PackagesList({ content }: PackagesListProps): ReactElement {
             </div>
             <span>{delivery.date}</span>
           </div>
-          <Link to="teste">
+          <Link to={`/deliveries/${delivery.id}`}>
             Detalhes
             <FiArrowRight size={20} />
           </Link>
