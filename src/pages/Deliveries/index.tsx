@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FiLogOut, FiSearch } from 'react-icons/fi';
 
 import { PackagesList } from '../../components/PackagesList';
+
+import api from '../../services/api';
 
 import {
   Main,
@@ -18,46 +20,29 @@ type Package = {
   id: number;
   title: string;
   date: string;
+  status?: string;
 };
 
 const Deliveries: React.FC = () => {
-  const pendentes = [
-    {
-      id: 1,
-      title: 'Pacote 03',
-      date: '01/07/2020',
-    },
-    {
-      id: 2,
-      title: 'Pacote 04',
-      date: '02/07/2020',
-    },
-    {
-      id: 3,
-      title: 'Pacote 05',
-      date: '03/07/2020',
-    },
-    {
-      id: 4,
-      title: 'Pacote 06',
-      date: '04/07/2020',
-    },
-  ];
+  const [packages, setPackages] = useState<Package[]>([]);
 
-  const feitas = [
-    {
-      id: 5,
-      title: 'Pacote 01',
-      date: '29/06/2020',
-    },
-    {
-      id: 6,
-      title: 'Pacote 02',
-      date: '30/06/2020',
-    },
-  ];
+  useEffect(() => {
+    api.get('/pendentes').then(pendentes => {
+      setPackages(pendentes.data);
+    });
+  }, []);
 
-  const [packages, setPackages] = useState<Package[]>(pendentes);
+  const changeToPendent = useCallback(async () => {
+    const pendentes = await api.get('/pendentes');
+
+    setPackages(pendentes.data);
+  }, []);
+
+  const changeToDone = useCallback(async () => {
+    const feitas = await api.get('/feitas');
+
+    setPackages(feitas.data);
+  }, []);
 
   return (
     <Container>
@@ -83,10 +68,10 @@ const Deliveries: React.FC = () => {
         <PackagesList content={packages} />
       </Main>
       <Footer>
-        <button type="button" onClick={() => setPackages(pendentes)}>
+        <button type="button" onClick={changeToPendent}>
           Pendentes
         </button>
-        <button type="button" onClick={() => setPackages(feitas)}>
+        <button type="button" onClick={changeToDone}>
           Feitas
         </button>
       </Footer>

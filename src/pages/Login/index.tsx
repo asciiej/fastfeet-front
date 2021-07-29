@@ -3,34 +3,34 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 
+import { useAuth } from '../../hooks/AuthContext';
+
 import logoImg from '../../assets/logotipo.svg';
 import nameImg from '../../assets/logo.svg';
 import errorImg from '../../assets/warning.svg';
 
 import { Main, Header, Form, InputWithIcon, Erro } from './styles';
 
-import api from '../../services/api';
-import { login } from '../../services/auth';
-
 const Login: React.FC = () => {
+  const { signIn } = useAuth();
   const history = useHistory();
   const [inputError, setInputError] = useState('');
 
-  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
 
   async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    if (!email || !password) {
+    if (!cpf || !password) {
       throw new Error('Preencha e-mail e senha para continuar!');
     }
 
     try {
-      // para teste, ao usar api do gostack, na sessions é passado email no lugar do cpf
-      const response = await api.post('/sessions', { email, password });
-
-      login(response.data.token);
+      signIn({
+        cpf,
+        password,
+      });
 
       history.push('/deliveries');
     } catch (err) {
@@ -60,8 +60,8 @@ const Login: React.FC = () => {
             <input
               type="text"
               placeholder="CPF"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={cpf}
+              onChange={e => setCpf(e.target.value)}
             />
             <FaUserAlt size={16} />
           </InputWithIcon>

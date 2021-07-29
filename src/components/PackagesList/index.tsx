@@ -1,5 +1,3 @@
-import { ReactElement } from 'react';
-
 import { Link } from 'react-router-dom';
 
 import { FiArrowRight } from 'react-icons/fi';
@@ -18,7 +16,7 @@ type PackagesListProps = {
   content: Array<Package>;
 };
 
-export function PackagesList({ content }: PackagesListProps): ReactElement {
+export const PackagesList: React.FC<PackagesListProps> = ({ content }) => {
   return (
     <Packages>
       {content.map(delivery => (
@@ -38,4 +36,4 @@ export function PackagesList({ content }: PackagesListProps): ReactElement {
       ))}
     </Packages>
   );
-}
+};
