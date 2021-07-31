@@ -5,7 +5,7 @@ import { FiLogOut, FiSearch } from 'react-icons/fi';
 
 import { PackagesList } from '../../components/PackagesList';
 
-import api from '../../services/api';
+import { GetPendent, GetDone } from '../../hooks/Gets';
 
 import {
   Main,
@@ -27,21 +27,21 @@ const Deliveries: React.FC = () => {
   const [packages, setPackages] = useState<Package[]>([]);
 
   useEffect(() => {
-    api.get('/pendentes').then(pendentes => {
-      setPackages(pendentes.data);
+    GetPendent().then(pendent => {
+      setPackages(pendent);
     });
   }, []);
 
-  const changeToPendent = useCallback(async () => {
-    const pendentes = await api.get('/pendentes');
-
-    setPackages(pendentes.data);
+  const changeToPendent = useCallback(() => {
+    GetPendent().then(pendent => {
+      setPackages(pendent);
+    });
   }, []);
 
-  const changeToDone = useCallback(async () => {
-    const feitas = await api.get('/feitas');
-
-    setPackages(feitas.data);
+  const changeToDone = useCallback(() => {
+    GetDone().then(done => {
+      setPackages(done);
+    });
   }, []);
 
   return (

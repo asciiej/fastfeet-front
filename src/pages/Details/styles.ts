@@ -57,6 +57,56 @@ export const Box = styled.div`
   }
 `;
 
+export const GridBox = styled.div`
+  background: #fff;
+  padding: 24px 16px;
+  position: relative;
+  top: -55px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+
+  h3 {
+    color: #4c4766;
+    font-size: 22px;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+
+  div + div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    div {
+      display: flex;
+      flex-direction: column;
+      font-size: 15px;
+      color: #6f6c80;
+    }
+  }
+
+  svg {
+    color: #ffc042;
+    margin-right: 15px;
+  }
+
+  span {
+    font-weight: bold;
+    font-size: 10px;
+    color: #4c4766;
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 15px;
+    color: #6f6c80;
+  }
+`;
+
 export const Footer = styled.footer`
   height: 115px;
   width: 100vw;
@@ -74,5 +124,14 @@ export const Footer = styled.footer`
     margin: 0 auto;
     border-radius: 4px;
     text-decoration: none;
+  }
+
+  button {
+    background: #ffc042;
+    color: #4c4766;
+    border: 0;
+    padding: 19px 114px;
+    margin: 0 auto;
+    border-radius: 4px;
   }
 `;
