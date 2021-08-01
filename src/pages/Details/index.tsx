@@ -13,14 +13,21 @@ type RoomParams = {
   id: string;
 };
 
+type PackageType = {
+  id: number;
+  title: string;
+  date: string;
+  status?: string;
+};
+
 const Details: React.FC = () => {
   const params = useParams<RoomParams>();
-  const [status, setStatus] = useState<string | undefined>('');
+  const [deliverie, setDeliverie] = useState<PackageType>({} as PackageType);
   const packageId = params.id;
 
   useEffect(() => {
     GetPackage(packageId).then(response => {
-      setStatus(response.status);
+      setDeliverie(response);
     });
   }, [packageId]);
 
@@ -55,11 +62,11 @@ const Details: React.FC = () => {
           <div>
             <div>
               <span>STATUS</span>
-              {status}
+              {deliverie.status}
             </div>
             <div>
               <span>POSTADO EM</span>
-              01/07/2020
+              {deliverie.date}
             </div>
             <div>
               <span>DATA DE RETIRADA</span>
@@ -73,7 +80,7 @@ const Details: React.FC = () => {
         </GridBox>
       </Main>
       <Footer>
-        {status === 'Aguardando' ? (
+        {deliverie.status === 'Aguardando' ? (
           <button type="button">Retirar Pacote</button>
         ) : (
           <Link to="button">Entregar Pacote</Link>

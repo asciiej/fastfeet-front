@@ -25,6 +25,11 @@ type Package = {
 
 const Deliveries: React.FC = () => {
   const [packages, setPackages] = useState<Package[]>([]);
+  const [busca, setBusca] = useState('');
+
+  const packagesFiltrados = packages.filter(pacote =>
+    pacote.title.toLowerCase().includes(busca.toLocaleLowerCase()),
+  );
 
   useEffect(() => {
     GetPendent().then(pendent => {
@@ -59,13 +64,18 @@ const Deliveries: React.FC = () => {
           </div>
         </div>
         <InputWithIcon>
-          <input type="text" placeholder="Filtrar por bairro" />
+          <input
+            type="text"
+            placeholder="Filtrar por bairro"
+            value={busca}
+            onChange={e => setBusca(e.target.value)}
+          />
           <FiSearch />
         </InputWithIcon>
       </Header>
       <Main>
-        <Separator>{packages.length} entrega(s)</Separator>
-        <PackagesList content={packages} />
+        <Separator>{packagesFiltrados.length} entrega(s)</Separator>
+        <PackagesList content={packagesFiltrados} />
       </Main>
       <Footer>
         <button type="button" onClick={changeToPendent}>
