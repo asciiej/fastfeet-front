@@ -29,3 +29,9 @@ export async function GetPackage(id: string): Promise<Package> {
     throw new Error('ID não encontrado');
   }
 }
+
+export function ChangeStatus(id: string): void {
+  api.patch(`/pacotes?id=${id}`, {
+    status: 'Retirado',
+  });
+}

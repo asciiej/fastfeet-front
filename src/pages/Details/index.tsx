@@ -5,9 +5,11 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { FaClipboardList } from 'react-icons/fa';
 import { AiFillInfoCircle } from 'react-icons/ai';
 
-import { Header, Main, Box, GridBox, Footer } from './styles';
+import feitoImg from '../../assets/feito.svg';
 
-import { GetPackage } from '../../hooks/Gets';
+import { Header, Main, Box, GridBox, Footer, Alert } from './styles';
+
+import { GetPackage, ChangeStatus } from '../../hooks/Gets';
 
 type RoomParams = {
   id: string;
@@ -23,6 +25,7 @@ type PackageType = {
 const Details: React.FC = () => {
   const params = useParams<RoomParams>();
   const [deliverie, setDeliverie] = useState<PackageType>({} as PackageType);
+  const [alert, setAlert] = useState('');
   const packageId = params.id;
 
   useEffect(() => {
@@ -81,11 +84,30 @@ const Details: React.FC = () => {
       </Main>
       <Footer>
         {deliverie.status === 'Aguardando' ? (
-          <button type="button">Retirar Pacote</button>
+          <button
+            type="button"
+            onClick={() => {
+              ChangeStatus(packageId);
+
+              setAlert('Pacote Retirado');
+
+              setTimeout(() => {
+                setAlert('');
+              }, 2000);
+            }}
+          >
+            Retirar Pacote
+          </button>
         ) : (
           <Link to="button">Entregar Pacote</Link>
         )}
       </Footer>
+      {alert && (
+        <Alert>
+          <img src={feitoImg} alt="Erro imagem" />
+          {alert}
+        </Alert>
+      )}
     </>
   );
 };
