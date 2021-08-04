@@ -20,6 +20,7 @@ export const Header = styled.header`
   color: #d5ccff;
   position: sticky;
   top: 0;
+  z-index: 1;
 
   h1 {
     font-size: 32px;

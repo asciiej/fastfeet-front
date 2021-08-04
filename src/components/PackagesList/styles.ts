@@ -9,8 +9,9 @@ export const Packages = styled.section`
 `;
 
 export const Box = styled.div`
-  > div {
-    background: #fff;
+  background: #fff;
+
+  section {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,6 +30,22 @@ export const Box = styled.div`
     span {
       color: #6f6c80;
       font-size: 10px;
+    }
+  }
+
+  > div {
+    margin: 8px 24px 40px 32px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      top: -6px;
+
+      span {
+        color: #00da6d;
+        font-size: 10px;
+        margin-top: 5px;
+      }
     }
   }
 

@@ -32,7 +32,7 @@ const Details: React.FC = () => {
     GetPackage(packageId).then(response => {
       setDeliverie(response);
     });
-  }, [packageId]);
+  }, [packageId, deliverie]);
 
   return (
     <>

@@ -23,6 +23,7 @@
     "react-hooks",
     "prettier"
   ],
+  "ignorePatterns": ["*.js", "*.jsx"],
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-one-expression-per-line": "off",

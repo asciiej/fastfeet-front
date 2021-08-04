@@ -31,7 +31,11 @@ export async function GetPackage(id: string): Promise<Package> {
 }
 
 export function ChangeStatus(id: string): void {
-  api.patch(`/pacotes?id=${id}`, {
-    status: 'Retirado',
-  });
+  try {
+    api.patch(`/pacotes/${id}`, {
+      status: 'Retirado',
+    });
+  } catch (err) {
+    throw new Error('erro');
+  }
 }

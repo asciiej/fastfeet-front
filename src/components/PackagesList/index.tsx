@@ -4,6 +4,8 @@ import { FiArrowRight } from 'react-icons/fi';
 
 import packageIcon from '../../assets/package.svg';
 
+import Progress from '../ProgressBar/index.js';
+
 import { Packages, Box } from './styles';
 
 type Package = {
@@ -21,13 +23,14 @@ export const PackagesList: React.FC<PackagesListProps> = ({ content }) => {
     <Packages>
       {content.map(delivery => (
         <Box key={delivery.id}>
-          <div>
+          <section>
             <div>
               <img src={packageIcon} alt="Package Icon" />
               <h3>{delivery.title}</h3>
             </div>
             <span>{delivery.date}</span>
-          </div>
+          </section>
+          <Progress />
           <Link to={`/deliveries/${delivery.id}`}>
             Detalhes
             <FiArrowRight size={20} />

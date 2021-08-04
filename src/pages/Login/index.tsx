@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      signIn({
+      await signIn({
         cpf,
         password,
       });
