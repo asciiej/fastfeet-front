@@ -27,12 +27,36 @@ const Details: React.FC = () => {
   const [deliverie, setDeliverie] = useState<PackageType>({} as PackageType);
   const [alert, setAlert] = useState('');
   const packageId = params.id;
+  let foot;
 
   useEffect(() => {
     GetPackage(packageId).then(response => {
       setDeliverie(response);
     });
-  }, [packageId, deliverie]);
+  }, [packageId, alert]);
+
+  if (deliverie.status === 'Aguardando') {
+    foot = (
+      <button
+        type="button"
+        onClick={async () => {
+          ChangeStatus(packageId);
+
+          setAlert('Pacote Retirado');
+
+          setTimeout(() => {
+            setAlert('');
+          }, 2000);
+        }}
+      >
+        Retirar Pacote
+      </button>
+    );
+  } else if (deliverie.status === 'Retirado') {
+    foot = <Link to={`/deliveries/${packageId}/confirm`}>Entregar Pacote</Link>;
+  } else {
+    foot = <></>;
+  }
 
   return (
     <>
@@ -82,30 +106,12 @@ const Details: React.FC = () => {
           </div>
         </GridBox>
       </Main>
-      <Footer>
-        {deliverie.status === 'Aguardando' ? (
-          <button
-            type="button"
-            onClick={() => {
-              ChangeStatus(packageId);
-
-              setAlert('Pacote Retirado');
-
-              setTimeout(() => {
-                setAlert('');
-              }, 2000);
-            }}
-          >
-            Retirar Pacote
-          </button>
-        ) : (
-          <Link to="button">Entregar Pacote</Link>
-        )}
-      </Footer>
+      <Footer>{foot}</Footer>
       {alert && (
         <Alert>
           <img src={feitoImg} alt="Erro imagem" />
           {alert}
+          <span>Só falta entregar</span>
         </Alert>
       )}
     </>

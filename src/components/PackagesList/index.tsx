@@ -12,6 +12,7 @@ type Package = {
   id: number;
   title: string;
   date: string;
+  status?: string;
 };
 
 type PackagesListProps = {
@@ -30,7 +31,7 @@ export const PackagesList: React.FC<PackagesListProps> = ({ content }) => {
             </div>
             <span>{delivery.date}</span>
           </section>
-          <Progress />
+          <Progress percent={delivery.status} />
           <Link to={`/deliveries/${delivery.id}`}>
             Detalhes
             <FiArrowRight size={20} />

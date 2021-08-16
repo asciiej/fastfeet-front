@@ -160,4 +160,9 @@ export const Alert = styled.div`
     margin: 0 auto;
     margin-bottom: 29.33px;
   }
+
+  span {
+    font-size: 12px;
+    margin-top: 8px;
+  }
 `;

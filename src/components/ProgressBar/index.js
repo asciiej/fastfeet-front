@@ -3,10 +3,16 @@ import { ProgressBar, Step } from 'react-step-progress-bar';
 
 import dotIcon from '../../assets/dot.svg';
 
-export default function Progress() {
+const steps = {
+  Aguardando: 0,
+  Retirado: 50,
+  Entregue: 100,
+};
+
+export default function Progress(props) {
   return (
     <ProgressBar
-      percent={75}
+      percent={steps[props.percent]}
       height={3}
       filledBackground="#00DA6D"
     >
