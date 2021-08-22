@@ -23,8 +23,12 @@
     "react-hooks",
     "prettier"
   ],
-  "ignorePatterns": ["*.js", "*.jsx"],
+  "ignorePatterns": [
+    "*.js",
+    "*.jsx"
+  ],
   "rules": {
+    "jsx-a11y/label-has-associated-control": "off",
     "prettier/prettier": "error",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",

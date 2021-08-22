@@ -55,7 +55,7 @@ const Details: React.FC = () => {
   } else if (deliverie.status === 'Retirado') {
     foot = <Link to={`/deliveries/${packageId}/confirm`}>Entregar Pacote</Link>;
   } else {
-    foot = <></>;
+    foot = null;
   }
 
   return (

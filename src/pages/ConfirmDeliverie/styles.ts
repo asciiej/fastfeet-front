@@ -17,6 +17,32 @@ export const Main = styled.main`
   height: calc(100vh - 202px);
   padding: 30px 20px 0px 20px;
   background: #f7f5fa;
+
+  input[type='file'] {
+    display: none;
+  }
+
+  label {
+    color: #fff;
+    background: #4c33cc;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+
+  span {
+    margin-left: 8px;
+  }
+
+  img {
+    margin-top: 5px;
+    margin-left: 8px;
+    max-width: 375px;
+    max-height: 500px;
+  }
 `;
 
 export const Footer = styled.footer`
