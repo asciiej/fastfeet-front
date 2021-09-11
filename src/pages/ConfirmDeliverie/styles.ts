@@ -40,7 +40,7 @@ export const Main = styled.main`
   img {
     margin-top: 5px;
     margin-left: 8px;
-    max-width: 375px;
+    max-width: 325px;
     max-height: 500px;
   }
 `;
