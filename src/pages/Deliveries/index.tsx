@@ -5,7 +5,8 @@ import { FiLogOut, FiSearch } from 'react-icons/fi';
 
 import { PackagesList } from '../../components/PackagesList';
 
-import { GetPendent, GetDone } from '../../hooks/Gets';
+import { usePackage } from '../../hooks/PackageContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 import {
   Main,
@@ -24,6 +25,8 @@ type Package = {
 };
 
 const Deliveries: React.FC = () => {
+  const { user } = useAuth();
+  const { feitos, pendentes } = usePackage();
   const [packages, setPackages] = useState<Package[]>([]);
   const [busca, setBusca] = useState('');
 
@@ -32,28 +35,22 @@ const Deliveries: React.FC = () => {
   );
 
   useEffect(() => {
-    GetPendent().then(pendent => {
-      setPackages(pendent);
-    });
-  }, []);
+    setPackages(pendentes);
+  }, [pendentes]);
 
   const changeToPendent = useCallback(() => {
-    GetPendent().then(pendent => {
-      setPackages(pendent);
-    });
-  }, []);
+    setPackages(pendentes);
+  }, [pendentes]);
 
   const changeToDone = useCallback(() => {
-    GetDone().then(done => {
-      setPackages(done);
-    });
-  }, []);
+    setPackages(feitos);
+  }, [feitos]);
 
   return (
     <Container>
       <Header>
         <div>
-          <p>Bem vindo, Tiago Souza</p>
+          <p>Bem vindo, {user}</p>
           <FiLogOut />
         </div>
         <div>

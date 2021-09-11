@@ -9,7 +9,7 @@ import feitoImg from '../../assets/feito.svg';
 
 import { Header, Main, Box, GridBox, Footer, Alert } from './styles';
 
-import { GetPackage, ChangeStatus } from '../../hooks/Gets';
+import { usePackage } from '../../hooks/PackageContext';
 
 type RoomParams = {
   id: string;
@@ -27,20 +27,21 @@ const Details: React.FC = () => {
   const [deliverie, setDeliverie] = useState<PackageType>({} as PackageType);
   const [alert, setAlert] = useState('');
   const packageId = params.id;
+  const { getPackage, changeStatus } = usePackage();
   let foot;
 
   useEffect(() => {
-    GetPackage(packageId).then(response => {
+    getPackage(packageId).then(response => {
       setDeliverie(response);
     });
-  }, [packageId, alert]);
+  }, [getPackage, packageId]);
 
   if (deliverie.status === 'Aguardando') {
     foot = (
       <button
         type="button"
         onClick={async () => {
-          ChangeStatus(packageId);
+          changeStatus(packageId);
 
           setAlert('Pacote Retirado');
 
